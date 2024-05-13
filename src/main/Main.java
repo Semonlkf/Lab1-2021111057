@@ -143,7 +143,11 @@ private static void calculateShortestPath(BufferedReader reader, Graph graph) th
 
 
 //private stastic void
+//<<<<<<< HEAD
     //这是第二次修改
     //这是第二次修改
+//=======
+    //B2的修改
+//>>>>>>> B2
 }
 //这是B1分支上做的修改
