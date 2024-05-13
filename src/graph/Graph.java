@@ -180,9 +180,9 @@ public Map<String, List<String>> dijkstraAllPaths(String start) {
 
     return allPaths;
 }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //这是B1分支上做的修改
-=======
+//=======
     public String randomWalk(){
         Thread inputThread = new Thread(() -> {
             Scanner scanner = new Scanner(System.in);
@@ -244,11 +244,11 @@ public Map<String, List<String>> dijkstraAllPaths(String start) {
             Thread.currentThread().interrupt();
             System.out.println("Main thread was interrupted.");
             // 确保中断后跳出循环
-            return
+            return null;
         }
         return null;
     }
 
 
->>>>>>> C4
+//>>>>>>> C4
 }
