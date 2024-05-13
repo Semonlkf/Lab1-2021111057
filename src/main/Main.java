@@ -37,7 +37,7 @@ public class Main {
                         calculateShortestPath(reader, graph);
                         break;
                     case "5":
-                        //performRandomWalk(graph, reader);
+                        performRandomWalk(graph, reader);
                         break;
                     case "6":
                         flag = false;
@@ -141,6 +141,9 @@ private static void calculateShortestPath(BufferedReader reader, Graph graph) th
 }
 
 
+
 //private stastic void
+    //这是第二次修改
+    //这是第二次修改
 }
 //这是B1分支上做的修改
