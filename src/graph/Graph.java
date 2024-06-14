@@ -183,71 +183,51 @@ public Map<String, List<String>> dijkstraAllPaths(String start) {
 //<<<<<<< HEAD
 //这是B1分支上做的修改
 //=======
-    public String randomWalk(){
-        Thread inputThread = new Thread(() -> {
-            Scanner scanner = new Scanner(System.in);
-            while (!exit) {
-                if (scanner.hasNextLine()) {
-                    String input = scanner.nextLine();
-                    if ("q".equals(input)) {
-                        exit = true;
-                    }
-                }
-            }
-            scanner.close();
-            System.out.println("Input thread terminated.");
-        });
+public String randomWalk(){
+    Random random = new Random();
+    int index = random.nextInt(adjacencyList.size());
+    List<String> keys = new ArrayList<>(adjacencyList.keySet());
+    String startNode = keys.get(index);   //随机获取初始节点
+    String currentNode = startNode;
+    Set<String> visitedNode = new HashSet<>();
+    Set<String> visiteEdge = new HashSet<>();
+    StringBuilder randomPath = new StringBuilder();
 
-        inputThread.start(); // 启动输入监听线程
-
-        try {
-            while (!exit) {
-                Random random = new Random();
-                int index = random.nextInt(adjacencyList.size());
-                List<String> keys = new ArrayList<>(adjacencyList.keySet());
-                String startNode = keys.get(index);
-                String currentNode = startNode;
-                Set<String> visitedNode = new HashSet<>();
-                Set<String> visiteEdge = new HashSet<>();
-                StringBuilder randomPath = new StringBuilder();
-
-                while (!visitedNode.contains(currentNode)) {
-                    randomPath.append(currentNode).append(" ");
-                    System.out.print(currentNode + "->");
-                    visitedNode.add(currentNode);
-                    List<Edge> targetNode = getEdges(currentNode);
-                    if (targetNode.isEmpty()) {
-                        break; // 没有下一个节点
-                    }
-
-                    List<Edge> unVisitedTargets = new ArrayList<>();
-                    for (Edge target : targetNode) {
-                        String edge = currentNode + "->" + target.target;
-                        if (!visiteEdge.contains(edge)) {
-                            unVisitedTargets.add(target);
-                        }
-                    }
-
-                    if (unVisitedTargets.isEmpty()) {
-                        break; // 当前节点没有剩余邻边，终止
-                    }
-
-                    int randomIndex = new Random().nextInt(targetNode.size());
-                    Edge nextNode = unVisitedTargets.get(randomIndex);
-                    String edge = currentNode + "->" + nextNode.target;
-                    visiteEdge.add(edge);
-                    currentNode = nextNode.target;
-                    Thread.sleep(1000);
-                }
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.out.println("Main thread was interrupted.");
-            // 确保中断后跳出循环
-            return null;
+    while (!visitedNode.contains(currentNode)) {
+        randomPath.append(currentNode).append(" ");
+        System.out.print(currentNode + "->");
+        visitedNode.add(currentNode);
+        List<Edge> targetNode = getEdges(currentNode);
+        if (targetNode.isEmpty()) {
+            break;   //没有下一个节点
         }
-        return null;
+
+        List<Edge> unVisitedTargets = new ArrayList<>();
+        for (Edge target : targetNode) {
+            String edge = currentNode + "->" + target.target;
+            if (!visiteEdge.contains(edge)) {
+                unVisitedTargets.add(target);
+            }
+        }
+
+        if (unVisitedTargets.isEmpty()) {
+            break;   //当前节点没有剩余邻边，终止
+        }
+
+        int randomIndex = new Random().nextInt(targetNode.size());
+        Edge nextNode = unVisitedTargets.get(randomIndex);
+        String edge = currentNode + "->" + nextNode.target;
+        visiteEdge.add(edge);
+        currentNode = nextNode.target;
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
+    System.out.println("End!!!");
+    return randomPath.toString();
+}
 
 
 //>>>>>>> C4
